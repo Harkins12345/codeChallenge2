@@ -21,6 +21,9 @@ storyForm.addEventListener('submit', e => {
 
         storyForm.reset();
 
-        fetch(`${window.location.origin}/posts`, options);
+        fetch(`${window.location.origin}/posts`, options)
+            .then(r => r.json())
+            .then(data => window.location.assign(`${window.location.origin}/posts/${data.id}`))
+            .catch(err => console.log(err));
     }
 })

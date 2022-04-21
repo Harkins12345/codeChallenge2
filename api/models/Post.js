@@ -14,12 +14,8 @@ module.exports = class Post {
                 let postData = await db.query(`SELECT posts.*
                                                 FROM posts 
                                                 WHERE posts.id = $1`, [id]);
-                console.log(postData.rows[0])
-                //let post = new Post(postData.rows[0]);
-                //resolve (post);
-                resolve('Hello World');
+                resolve (postData.rows[0]);
             } catch (err) {
-                console.log(err);
                 reject('Post not found');
             }
         });
@@ -33,9 +29,8 @@ module.exports = class Post {
                                              (title, author, story)
                                               VALUES ($1, $2, $3)
                                               RETURNING *;`, [title, author, story]);
-                //resolve (result.rows[0]);
                 console.log(result.rows[0]);
-                resolve('Good')
+                resolve (result.rows[0]);
             } catch (err) {
                 console.log(err)
                 reject('Book could not be created');
