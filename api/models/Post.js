@@ -1,3 +1,5 @@
+const db = require('../dbConfig/init');
+
 module.exports = class Post {
     constructor(data){
         this.title = data.title;
@@ -29,8 +31,11 @@ module.exports = class Post {
                                              (title, author, story, day, month)
                                               VALUES ($1, $2, $3, $4, $5)
                                               RETURNING *;`, [ title, author, story, day, month ]);
-                resolve (result.rows[0]);
+                //resolve (result.rows[0]);
+                console.log(result.rows[0]);
+                resolve('Good')
             } catch (err) {
+                console.log(err)
                 reject('Book could not be created');
             }
         });
