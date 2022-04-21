@@ -1,0 +1,32 @@
+version: '3'
+services:
+  api:
+    image: 'node:latest'
+    working_dir: /code
+    volumes:
+      - type: bind
+        source: ./api
+        target: /code
+    ports:
+      - 3000:3000
+    environment: 
+      - PORT=3000
+      - PGUSER=futureproof
+      - PGHOST=db
+      - PGPASSWORD=telegraphpostspass
+      - PGDATABASE=telegraphposts
+      - PGPORT=5432
+    depends_on: 
+      - db
+    command: bash -c "npm install && npm run dev"
+
+  db:
+    image: 'postgres:latest'
+    expose:
+      - "5432"
+    environment: 
+      - POSTGRES_DB=telegraphposts
+      - POSTGRES_USER=futureproof
+      - POSTGRES_PASSWORD=telegraphpostspass
+    volumes:
+      - "./db/setup/:/docker-entrypoint-initdb.d/:ro"
