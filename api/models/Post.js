@@ -29,7 +29,6 @@ module.exports = class Post {
                                              (title, author, story)
                                               VALUES ($1, $2, $3)
                                               RETURNING *;`, [title, author, story]);
-                console.log(result.rows[0]);
                 resolve (result.rows[0]);
             } catch (err) {
                 console.log(err)
