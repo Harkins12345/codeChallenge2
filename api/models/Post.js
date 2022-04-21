@@ -1,36 +1,38 @@
 const db = require('../dbConfig/init');
 
 module.exports = class Post {
-    constructor(data){
+    constructor(data) {
         this.title = data.title;
         this.author = data.author;
         this.story = data.story;
     };
-    
-    
-    static findPost(postData){
-        return new Promise (async (resolve, reject) => {
+
+
+    static findPost(id) {
+        return new Promise(async (resolve, reject) => {
             try {
                 let postData = await db.query(`SELECT posts.*
                                                 FROM posts 
-                                                WHERE posts.author = $1
-                                                AND posts.`, [ author ]);
-                let book = new Book(postData.rows[0]);
-                resolve (post);
+                                                WHERE posts.id = $1`, [id]);
+                console.log(postData.rows[0])
+                //let post = new Post(postData.rows[0]);
+                //resolve (post);
+                resolve('Hello World');
             } catch (err) {
+                console.log(err);
                 reject('Post not found');
             }
         });
     };
-    
-    static async create(postData){
-        return new Promise (async (resolve, reject) => {
+
+    static async create(postData) {
+        return new Promise(async (resolve, reject) => {
             try {
-                const { title, author, story, day, month } = postData;
+                const { title, author, story } = postData;
                 let result = await db.query(`INSERT INTO posts
-                                             (title, author, story, day, month)
-                                              VALUES ($1, $2, $3, $4, $5)
-                                              RETURNING *;`, [ title, author, story, day, month ]);
+                                             (title, author, story)
+                                              VALUES ($1, $2, $3)
+                                              RETURNING *;`, [title, author, story]);
                 //resolve (result.rows[0]);
                 console.log(result.rows[0]);
                 resolve('Good')
