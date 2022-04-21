@@ -1,5 +1,5 @@
 # Michael and Andrew's Telegra.ph clone
-Building Google's page in dark mode with Albert Stoykov and Michael Harkins-Meloy
+Creating a clone of the webpage 'https://telegra.ph/'
 
 ## Installation & Usage
 
