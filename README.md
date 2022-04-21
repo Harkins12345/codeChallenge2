@@ -1,4 +1,4 @@
-# Google-with-Michael
+# Michael and Andrew's Telegra.ph clone
 Building Google's page in dark mode with Albert Stoykov and Michael Harkins-Meloy
 
 ## Installation & Usage
